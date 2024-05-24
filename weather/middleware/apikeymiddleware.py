@@ -1,4 +1,5 @@
 import os
+from django.http import JsonResponse
 
 
 class ApiKeyMiddleware:
@@ -22,7 +23,11 @@ class ApiKeyMiddleware:
             HttpResponse: The HTTP response.
         """
         # Retrieve the API key from environment variables
-        request.api_key = os.environ.get('API_KEY')
+        api_key = os.environ.get('API_KEY')
+        if not api_key:
+            return JsonResponse({'error': 'API key is not set'}, status=500)
+
+        request.api_key = api_key
 
         response = self.get_response(request)
         return response

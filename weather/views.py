@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from .services.weather_api_service import WeatherAPIService
+from .services.weather_info_service import get_weather_info
 
 
 def get(request):
@@ -8,17 +8,9 @@ def get(request):
 
     # Get location from the request query parameters
     location = request.GET.get('location')
-    if not location:
-        # Return error response if location parameter is missing
-        return JsonResponse({'error': 'Location parameter is missing'},  status=400)
 
-    # Get weather information for the specified location
-    weather_api_service = WeatherAPIService(api_key)
-    weather_info = weather_api_service.get_weather_data(location)
+    # Retrieve weather information for the specified location
+    weather_info, status_code = get_weather_info(location, api_key)
 
-    # Check for any errors in weather data retrieval
-    if 'error' in weather_info:
-        return JsonResponse(weather_info, status=400)
-
-    # Return weather information if retrieval was successful
-    return JsonResponse(weather_info, status=200)
+    # Return the weather information or error response
+    return JsonResponse(weather_info, status=status_code)
