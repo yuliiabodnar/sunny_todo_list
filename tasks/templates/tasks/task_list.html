@@ -9,7 +9,7 @@
     <ul class="list-group">
        {% for task in tasks %}
           <li class="list-group-item">
-              <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'tasks:task_view'%}">{{task.name}}</a>
+              <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="">{{task.name}},</a> {{task.location.name}}
           </li>
        {% endfor %}
     </ul>
