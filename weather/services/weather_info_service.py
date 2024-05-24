@@ -1,5 +1,5 @@
 # weather/services/weather_info_service.py
-from weather_api_service import WeatherAPIService
+from .weather_api_service import WeatherAPIService
 
 
 def _map_weather_response(location, response):
@@ -50,13 +50,13 @@ def get_weather_info(location, api_key):
         return {'error': 'Location parameter is missing'}, 400
 
     # Initialize WeatherService with the API key
-    weather_service = WeatherAPIService(api_key)
+    weather_api_service = WeatherAPIService(api_key)
 
     # Get weather information for the specified location
-    res = weather_service.get_weather_data(location)
+    res = weather_api_service.get_weather_data(location)
 
     # Map the weather response to a structured format
-    weather_info =  _map_weather_response(location, res)
+    weather_info = _map_weather_response(location, res)
 
     # Check for any errors in weather data retrieval
     if 'error' in weather_info:
