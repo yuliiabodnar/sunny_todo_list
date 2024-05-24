@@ -25,6 +25,7 @@ services:
       - DATABASE_PASSWORD=Password1
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
+      - API_KEY=3f60bb87e96c83c0f9758c61a33a590e
 
 volumes:
    postgres_data:

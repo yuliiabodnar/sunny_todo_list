@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'weather.middleware.apikeymiddleware.ApiKeyMiddleware',
 ]
 
 ROOT_URLCONF = 'sunny_todo_list.urls'

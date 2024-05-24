@@ -1,9 +1,19 @@
-# tasks/services/weather_service.py
+# tasks/services/weather_api_service.py
 import urllib.request
 import json
 
 
 def _map_weather_response(location, response):
+    """
+    Map the weather API response to a structured format.
+
+    Args:
+        location (str): The location for which weather data is requested.
+        response (dict): The weather API response.
+
+    Returns:
+        dict: Weather information in a structured format.
+    """
     mapped_data = {'location': location}
 
     # Validate response structure and extract data if available
@@ -24,15 +34,38 @@ def _map_weather_response(location, response):
     return mapped_data
 
 
-class WeatherService:
+class WeatherAPIService:
     def __init__(self, api_key):
+        """
+        Initialize the WeatherService with the provided API key.
+
+        Args:
+            api_key (str): The API key for accessing the weather service.
+        """
         self.api_key = api_key
 
     def _construct_api_url(self, location):
-        # Construct the URL for the weather API using the location and API key
+        """
+        Construct the URL for the weather API using the location and API key.
+
+        Args:
+            location (str): The location for which weather data is requested.
+
+        Returns:
+            str: The constructed API URL.
+        """
         return f'https://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={self.api_key}'
 
     def get_weather_data(self, location):
+        """
+        Get weather data for the specified location.
+
+        Args:
+            location (str): The location for which weather data is requested.
+
+        Returns:
+            dict: Weather information in a structured format.
+        """
         # Get the API URL
         url = self._construct_api_url(location)
 
