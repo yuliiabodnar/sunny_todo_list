@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_NAME=tasksdatabase
+      - DATABASE_NAME=sunnytodolist
       - DATABASE_USER=myuser
       - DATABASE_PASSWORD=Password1
       - DATABASE_HOST=db
