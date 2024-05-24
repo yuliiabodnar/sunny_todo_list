@@ -1,0 +1,28 @@
+<!-- task_view.html -->
+
+{% extends 'tasks/base.html' %}
+
+{% block title %}
+    Task information
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td class="col-md-2" >Task:</td>
+            <td>{{ task.name }}</td>
+        </tr>
+        <tr>
+            <td>Location:</td>
+            <td>{{ task.location.name }}</td>
+        </tr>
+        <tr>
+            <td>Is completed</td>
+            <td>{{ task.completed|yesno:"Yes,No" }}</td>
+        </tr>
+    </tbody>
+</table>
+<a><button type="button" class="btn btn-secondary">Edit task</button></a>
+<a><button type="button" class="btn btn-secondary">Delete task</button></a>
+{% endblock %}
