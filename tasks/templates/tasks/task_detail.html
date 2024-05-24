@@ -1,4 +1,4 @@
-<!-- task_view.html -->
+<!-- task_detail.html -->
 
 {% extends 'tasks/base.html' %}
 
@@ -23,6 +23,6 @@
         </tr>
     </tbody>
 </table>
-<a><button type="button" class="btn btn-secondary">Edit task</button></a>
+<a href="{% url 'tasks:task_edit'  task.id %}"><button type="button" class="btn btn-secondary">Edit task</button></a>
 <a><button type="button" class="btn btn-secondary">Delete task</button></a>
 {% endblock %}
