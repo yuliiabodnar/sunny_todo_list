@@ -5,7 +5,6 @@ function fetchTasksBackground(location = '') {
             const taskContainer = document.getElementById('task-container');
             const tasks = taskContainer.getElementsByClassName('task');
             const tasksArray = Array.from(tasks);
-            console.log(tasks)
 
             data.forEach(taskData => {
                 const tasksInLocation = tasksArray.filter(taskElement => taskElement.getAttribute('location') === taskData.location);
@@ -25,7 +24,14 @@ function fetchLocationBackground(location) {
         .then(response => response.json())
         .then(data => {
             const taskContainer = document.getElementById('task-container');
-            taskContainer.className = `task ${data[].background_class}`;
+            const temperatureContainer = document.getElementById('location-temperature');
+
+            if (data.length > 0) {
+                taskContainer.className = `task ${data[0].background_class}`;
+                temperatureContainer.textContent =`Temperature: ${data[0].temperature}°C`;;
+            } else {
+                temperatureContainer.textContent = 'No temperature data available';
+            }
         })
         .catch(error => {
             console.error('Error fetching tasks:', error);

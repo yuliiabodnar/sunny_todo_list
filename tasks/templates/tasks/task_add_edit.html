@@ -7,11 +7,17 @@
 {% endblock %}
 
 {% block content %}
+{% load static %}
 <div id="task-container" class = "row">
-    <form method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary" type="submit">Save</button>
-    </form>
+    <div>
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary" type="submit">Save</button>
+        </form>
+    </div>
+    <div id='location-temperature'>
+    </div>
 </div>
+<script src="{% static 'js/location_onchange.js' %}"></script>
 {% endblock %}
