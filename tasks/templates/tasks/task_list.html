@@ -1,22 +1,19 @@
 <!-- tasks_list.html -->
-
 {% extends 'tasks/base.html' %}
 
 {% block title %}Tasks list{% endblock %}
 
 {% block content %}
-<div class = "row">
-    <ul class="list-group">
+{% load static %}
+<div id="task-container" class = "row">
        {% for task in tasks %}
-          <li class="list-group-item">
-              <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'tasks:task_detail' task.id %}">{{task.name}},</a> {{task.location.name}}
-          </li>
+            <div class="task {{ task.background_class }}" location="{{ task.location.name }}">
+                <h2>{{ task.name }}</h2>
+                <p>Location: {{ task.location.name }}</p>
+            </div>
        {% endfor %}
-    </ul>
-
-    {{background}}
-
 </div>
+<script src="{% static 'js/tasks_refresh.js' %}"></script>
 {% endblock %}
 
 <!-- List of tasks -->

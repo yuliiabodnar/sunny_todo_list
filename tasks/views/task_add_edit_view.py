@@ -2,8 +2,8 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from tasks.models import Task
-from tasks.forms.handlers.task_form_handler import handle_task_form
+from tasks.models.task import Task
+from tasks.handlers.forms.task_form_handler import handle_task_form
 
 
 class TaskAddEditView(View):

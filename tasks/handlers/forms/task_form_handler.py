@@ -1,5 +1,5 @@
 from tasks.models import Task
-from ..task_form import TaskForm
+from tasks.forms.task_form import TaskForm
 
 
 def handle_task_form(request, task=None):

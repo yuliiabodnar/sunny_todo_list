@@ -1,5 +1,6 @@
 from django import forms
-from tasks.models import Task, Location
+from tasks.models.task import Task
+from tasks.models.location import Location
 
 
 class TaskForm(forms.ModelForm):
