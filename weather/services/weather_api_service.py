@@ -1,4 +1,4 @@
-# weather/services/weather_api_service.py
+# weather/weather/weather_service.py
 import urllib.request
 import json
 

@@ -1,4 +1,4 @@
-# weather/services/weather_info_service.py
+# weather/weather/weather_info_service.py
 from .weather_api_service import WeatherAPIService
 
 

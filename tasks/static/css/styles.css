@@ -1,0 +1,11 @@
+.task-cold {
+    background-color: lightblue;
+}
+
+.task-moderate {
+    background-color: lightgreen;
+}
+
+.task-warm {
+    background-color: lightyellow;
+}
