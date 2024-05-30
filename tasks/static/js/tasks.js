@@ -48,6 +48,16 @@ function updateTemperatureContainerText(textContent = '') {
 }
 
 /**
+ * Displays a confirmation dialog for deleting a task.
+ * @returns {boolean} - True if the user confirms deletion, false otherwise.
+ */
+function confirmDelete() {
+    // Show confirmation dialog
+    return confirm('Are you sure you want to delete this task?');
+}
+
+
+/**
  * Fetches location data from the server and updates task container class name and temperature container text content.
  * @param {string} location - The location for which data is to be fetched.
  */
@@ -59,7 +69,7 @@ function fetchLocationBackground(location) {
         return;
     }
 
-    / Fetch location data from the server
+    // Fetch location data from the server
     fetch('/api/location/' + location + '/')
         .then(response => response.json())
         .then(data => {

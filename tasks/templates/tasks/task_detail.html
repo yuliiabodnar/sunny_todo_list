@@ -23,6 +23,8 @@
         </tr>
     </tbody>
 </table>
-<a href="{% url 'tasks:task_edit'  task.id %}"><button type="button" class="btn btn-secondary">Edit task</button></a>
-<a><button type="button" class="btn btn-secondary">Delete task</button></a>
+<a href="{% url 'tasks:task_edit' task.id %}"><button type="button" class="btn btn-secondary">Edit task</button></a>
+<a href="{% url 'tasks:task_delete' task.id %}" onclick="return confirmDelete();">
+    <button type="button" class="btn btn-secondary">Delete task</button>
+</a>
 {% endblock %}
