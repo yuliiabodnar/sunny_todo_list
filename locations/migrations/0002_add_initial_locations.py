@@ -3,7 +3,7 @@ from django.db import migrations
 
 
 def create_initial_locations(apps, schema_editor):
-    location = apps.get_model('tasks', 'Location')
+    location = apps.get_model('locations', 'Location')
     initial_locations = [
         'London',
         'Warsaw',
@@ -13,10 +13,15 @@ def create_initial_locations(apps, schema_editor):
         'Paris',
         'Rome',
         'Prague',
+        'Sydney',
         'Stockholm',
         'Sofia',
         'Bucharest',
         'Zurich',
+        'Brisbane',
+        'Ontario',
+        'Vancouver',
+        'New York'
     ]
     for location_name in initial_locations:
         location.objects.create(name=location_name)
@@ -25,7 +30,7 @@ def create_initial_locations(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tasks', '0001_initial'),
+        ('locations', '0001_initial'),
     ]
 
     operations = [

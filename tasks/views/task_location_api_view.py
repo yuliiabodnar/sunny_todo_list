@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views import View
-from ..models.location import Location
+from locations.models.location import Location
 from ..weather.weather_service import WeatherService
 from ..weather.weather_parser import WeatherParser
 

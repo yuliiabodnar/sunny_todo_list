@@ -1,5 +1,6 @@
 # weather/weather/weather_service.py
 import urllib.request
+import urllib.parse
 import json
 
 
@@ -23,7 +24,8 @@ class WeatherAPIService:
         Returns:
             str: The constructed API URL.
         """
-        return f'https://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={self.api_key}'
+        encoded_location = urllib.parse.quote(location)
+        return f'https://api.openweathermap.org/data/2.5/weather?q={encoded_location}&units=metric&appid={self.api_key}'
 
     def get_weather_data(self, location):
         """

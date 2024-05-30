@@ -13,10 +13,10 @@ class TaskListAPIView(View):
         # Get the list of locations from the Task model
         locations = Task.objects.values_list('location__name', flat=True).distinct()
 
-        location_context = []
+        locations_context = []
         for location in locations:
             location_weather_info = weather_service.get_weather_info(location)
             parsed_weather_info = weather_parser.parse_location_weather_response(location, location_weather_info)
-            location_context.append(parsed_weather_info)
+            locations_context.append(parsed_weather_info)
 
-        return JsonResponse(location_context, safe=False)
+        return JsonResponse(locations_context, safe=False)

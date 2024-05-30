@@ -42,8 +42,6 @@ class WeatherService:
             # Build the full URL with query parameters using urlunparse
             full_url = urlunparse((self.request.scheme, self.request.get_host(), weather_path, '', query_string, ''))
 
-            # full_url = f"{weather_url}?{'&'.join([f'{key}={value}' for key, value in params.items()])}"
-
             return full_url
         except Exception as e:
             # Handle any errors that occur during URL generation
