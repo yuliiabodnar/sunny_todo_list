@@ -32,7 +32,7 @@ class TaskAddEditView(View):
 
         Args:
             request (HttpRequest): The HTTP request object.
-            task_id (int, optional): The ID of the task to edit. Defaults to None.
+            pk (int, optional):    The ID of the task to edit. Defaults to None.
 
         Returns:
             HttpResponse: The rendered form.
@@ -47,7 +47,7 @@ class TaskAddEditView(View):
 
         Args:
             request (HttpRequest): The HTTP request object.
-            task_id (int, optional): The ID of the task to edit. Defaults to None.
+            pk (int, optional): The ID of the task to edit. Defaults to None.
 
         Returns:
             HttpResponseRedirect: Redirects to the task list view if the form is saved successfully.

@@ -5,12 +5,14 @@
 
 {% block content %}
 {% load static %}
-<div id="task-container" class = "row">
+<div id="task-list-container" class = "row">
        {% for task in tasks %}
+    <a href="{% url 'tasks:task_detail' pk=task.pk %}">
             <div class="task {{ task.background_class }}" location="{{ task.location.name }}">
                 <h2>{{ task.name }}</h2>
                 <p>Location: {{ task.location.name }}</p>
             </div>
+    </a>
        {% endfor %}
 </div>
 <script src="{% static 'js/tasks_refresh.js' %}"></script>
