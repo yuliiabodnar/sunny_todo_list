@@ -5,8 +5,7 @@ from locations.models.location import Location
 from tasks.handlers.views.context_handler import get_locations_context
 
 
-class TaskLocationAPIView(View):
-
+class TaskLocationContext(View):
     def get_location(self, location_id):
         if location_id:
             return get_object_or_404(Location, pk=location_id)

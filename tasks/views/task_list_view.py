@@ -1,9 +1,8 @@
 # tasks/views/task_list_view.py
-import requests
-from django.shortcuts import render
 from django.views.generic import ListView
 from tasks.models.task import Task
 from tasks.handlers.views.context_handler import update_tasks_if_completed
+from django.template.response import TemplateResponse
 
 
 class TaskListView(ListView):
@@ -20,10 +19,10 @@ class TaskListView(ListView):
             request (HttpRequest): The HTTP GET request object.
 
         Returns:
-            HttpResponse: The rendered task list template.
+            TemplateResponse: The rendered task list template.
         """
         tasks = Task.objects.all()
         updated_tasks = update_tasks_if_completed(tasks)
 
-        return render(request, self.template_name, {'tasks': updated_tasks})
+        return TemplateResponse(request, self.template_name, {'tasks': updated_tasks})
         

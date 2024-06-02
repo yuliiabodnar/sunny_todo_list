@@ -5,7 +5,7 @@ from locations.models.location import Location
 from tasks.handlers.views.context_handler import get_locations_context
 
 
-class TaskListAPIView(View):
+class TaskLocationsContext(View):
     """
     Handle GET requests to retrieve a list of locations associated with not completed tasks.
 
@@ -17,8 +17,7 @@ class TaskListAPIView(View):
     """
     def get(self, request):
         # Get the list of Location objects associated with not completed tasks
-        locations = Location.objects.exclude(
-            Q(task__completed=True) | Q(task__isnull=True)
+        locations = Location.objects.exclude(Q(task__isnull=True)
         ).distinct()
         locations_context = get_locations_context(request, locations)
 

@@ -23,7 +23,7 @@ function buildTasksMap() {
  */
 function fetchTasksBackground(location = '') {
     // Fetch tasks data from the server
-    fetch('/api/tasks/')
+    fetch(locationsContextUrl)
         .then(response => response.json())
         .then(data => {
             // Rebuild the tasks map if it's empty
@@ -85,7 +85,7 @@ function fetchLocationBackground(location) {
     }
 
     // Fetch location data from the server
-    fetch('/api/location/' + location + '/')
+    fetch(locationsContextUrl + location + '/')
         .then(response => response.json())
         .then(data => {
             // Initialize default text content and class name
