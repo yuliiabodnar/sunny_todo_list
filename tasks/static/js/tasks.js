@@ -8,10 +8,12 @@ function buildTasksMap() {
 
     tasksArray.forEach(taskElement => {
         const location = taskElement.getAttribute('location');
-        if (!tasksMap.has(location)) {
-            tasksMap.set(location, []);
+        if (!taskElement.classList.contains('completed')) {
+            if (!tasksMap.has(location)) {
+                tasksMap.set(location, []);
+            }
+            tasksMap.get(location).push(taskElement);
         }
-        tasksMap.get(location).push(taskElement);
     });
 }
 
@@ -103,6 +105,11 @@ function fetchLocationBackground(location) {
             if (data.length > 0) {
                 className = `${data[0].background_class}`;
                 textContent =`Temperature: ${data[0].temperature}°C`;
+                // Update hidden fields in the form
+                document.getElementById('id_temperature').value = data[0].temperature;
+                document.getElementById('id_is_rain').value = data[0].is_rain;
+                document.getElementById('id_is_cloudy').value = data[0].is_cloudy;
+                document.getElementById('id_is_sunny').value =data[0].is_sunny;
             }
 
             // Update task container class name and temperature container text content
