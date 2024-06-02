@@ -33,7 +33,6 @@ class TaskManager(models.Manager):
 
         return unique
 
-
 class Task(models.Model):
     """
     A model representing a task.
@@ -41,4 +40,8 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
+    temperature = models.CharField(max_length=10, default='')
+    is_rain = models.BooleanField(default=False)
+    is_cloudy = models.BooleanField(default=False)
+    is_sunny = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
