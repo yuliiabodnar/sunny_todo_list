@@ -1,3 +1,20 @@
+// Initialize a map to store tasks by their location
+const tasksMap = new Map();
+
+function buildTasksMap() {
+    const taskListContainer = document.getElementById('task-list-container');
+    const tasks = taskListContainer.getElementsByClassName('task');
+    const tasksArray = Array.from(tasks);
+
+    tasksArray.forEach(taskElement => {
+        const location = taskElement.getAttribute('location');
+        if (!tasksMap.has(location)) {
+            tasksMap.set(location, []);
+        }
+        tasksMap.get(location).push(taskElement);
+    });
+}
+
 /**
  * Fetches tasks data from the server and updates the background color of task elements based on their location.
  * @param {string} location - The location for which tasks background is to be fetched.
@@ -7,21 +24,27 @@ function fetchTasksBackground(location = '') {
     fetch('/api/tasks/')
         .then(response => response.json())
         .then(data => {
-            const taskListContainer = document.getElementById('task-list-container');
-            // Get all task elements within the container
-            const tasks = taskListContainer.getElementsByClassName('task');
-            // Convert the HTMLCollection to an array
-            const tasksArray = Array.from(tasks);
+            // Rebuild the tasks map if it's empty
+            if (tasksMap.size === 0) {
+                buildTasksMap();
+            }
+
+             // Collect changes to apply them in batch
+             const updates = [];
 
             // Iterate over each task data from the server response
             data.forEach(taskData => {
-                // Filter tasks based on their location attribute
-                const tasksInLocation = tasksArray.filter(taskElement => taskElement.getAttribute('location') === taskData.location);
+                const tasksInLocation = tasksMap.get(taskData.location);
+                if (tasksInLocation) {
+                    tasksInLocation.forEach(taskElement => {
+                        updates.push({ element: taskElement, newClass: `task ${taskData.background_class}` });
+                    });
+                }
+            });
 
-                // Update the class name of each task element in the location
-                tasksInLocation.forEach(taskElement => {
-                    taskElement.className = `task ${taskData.background_class}`;
-                });
+            // Apply all updates in one go
+            updates.forEach(update => {
+                update.element.className = update.newClass;
             });
         })
         .catch(error => {

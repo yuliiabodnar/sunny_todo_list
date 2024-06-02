@@ -1,5 +1,6 @@
 // Fetch tasks on page load
 document.addEventListener('DOMContentLoaded', function() {
+    buildTasksMap();
     fetchTasksBackground();
 });
 
