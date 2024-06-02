@@ -10,7 +10,7 @@ class TaskAddEditView(View):
     """
     A class-based view for adding and editing tasks.
     """
-    template_name = 'tasks/task_add_edit.html' # Template to render the form
+    template_name = 'tasks/task_add_edit.html'
 
     def get_task(self, task_id):
         """

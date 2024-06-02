@@ -1,11 +1,11 @@
-# tasks/views/task_delete_view.py
-
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, render
 from django.views import View
-from tasks.models.task import Task
+from django.shortcuts import get_object_or_404
+from tasks.models import Task
 
 
 class TaskDeleteView(View):
+
     def get_task(self, task_id):
         """
         Retrieve a task by its ID if provided, otherwise return None.
@@ -22,7 +22,24 @@ class TaskDeleteView(View):
 
     def get(self, request, pk=None):
         """
-        Handle HTTP GET request to delete a task.
+        Handle HTTP GET request to display confirmation page for deleting a task.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            pk (int):              The primary key of the task to delete.
+
+        Returns:
+            HttpResponse: The response containing the confirmation page.
+        """
+        # Retrieve the task object
+        task = self.get_task(pk)
+
+        # Render the confirmation page
+        return render(request, 'tasks/task_confirm_delete.html', {'task': task})
+
+    def post(self, request, pk=None):
+        """
+        Handle HTTP POST request to delete a task.
 
         Args:
             request (HttpRequest): The HTTP request object.
@@ -37,5 +54,5 @@ class TaskDeleteView(View):
         # Delete the task
         task.delete()
 
-        # Redirect to the task list page
+        # Redirect to the task list page 
         return redirect('tasks:task_list')
