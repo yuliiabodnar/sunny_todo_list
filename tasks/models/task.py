@@ -1,5 +1,5 @@
 from django.db import models
-from .location import Location  # Import the Location model
+from locations.models import Location  # Import the Location model
 
 
 class TaskManager(models.Manager):
