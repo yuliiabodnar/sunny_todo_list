@@ -3,6 +3,7 @@ import requests
 from django.shortcuts import render
 from django.views.generic import ListView
 from tasks.models.task import Task
+from tasks.handlers.views.context_handler import update_tasks_if_completed
 
 
 class TaskListView(ListView):
@@ -22,5 +23,7 @@ class TaskListView(ListView):
             HttpResponse: The rendered task list template.
         """
         tasks = Task.objects.all()
+        updated_tasks = update_tasks_if_completed(tasks)
 
-        return render(request, self.template_name, {'tasks': tasks})
+        return render(request, self.template_name, {'tasks': updated_tasks})
+        

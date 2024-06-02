@@ -1,6 +1,6 @@
 from django.db import models
-from locations.weather.weather_service import WeatherService
-from locations.weather.weather_parser import WeatherParser
+from locations.weather.factory.request_weather_factory import RequestWeatherFactory
+from locations.weather.factory.weather_factory import WeatherFactory
 
 
 class Location(models.Model):
@@ -18,17 +18,14 @@ class Location(models.Model):
     class Meta:
         app_label = 'locations'
 
-    def get_location_weather(self, request=None):
+    def get_location_weather_factory(self, request=None):
         """
         Retrieve weather data for the location from an external API.
 
         Returns:
             Weather: Weather object.
         """
-        weather_service = WeatherService(request)
-        weather_parser = WeatherParser()
-
-        location_weather_info = weather_service.get_weather_info(self.name)
-        location_weather = weather_parser.parse_location_weather_response(self.name, location_weather_info)
-
-        return location_weather
+        if request:
+            return RequestWeatherFactory(request, self.name)
+        else:
+            return WeatherFactory()

@@ -1,4 +1,4 @@
-from locations.weather.weather import Weather
+from locations.weather.factory.weather_factory import WeatherFactory
 
 
 class WeatherParser:
@@ -45,4 +45,5 @@ class WeatherParser:
             is_sunny = True
 
         # Return the Weather object with the parsed data
-        return Weather(location, temperature, is_rain, is_cloudy, is_sunny)
+        weather_factory = WeatherFactory()
+        return weather_factory.create(location, temperature, is_rain, is_cloudy, is_sunny)
