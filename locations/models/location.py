@@ -15,17 +15,20 @@ class Location(models.Model):
         """
         return self.name
 
-    def get_weather_info(self, request):
+    class Meta:
+        app_label = 'locations'
+
+    def get_location_weather(self, request=None):
         """
         Retrieve weather data for the location from an external API.
 
         Returns:
-            dict: Weather data in JSON format.
+            Weather: Weather object.
         """
         weather_service = WeatherService(request)
         weather_parser = WeatherParser()
 
         location_weather_info = weather_service.get_weather_info(self.name)
-        parsed_weather_info = weather_parser.parse_location_weather_response(self.name, location_weather_info)
+        location_weather = weather_parser.parse_location_weather_response(self.name, location_weather_info)
 
-        return parsed_weather_info
+        return location_weather

@@ -1,32 +1,48 @@
-from django.http import JsonResponse
+from locations.weather.weather import Weather
 
 
 class WeatherParser:
-
-    def get_color_for_location(self, weather_data):
-        # Determine the background color based on weather data
-        background_class = None
-        if weather_data:
-            temperature = weather_data.get('temp')
-            if temperature is not None:
-                if temperature < 10:
-                    background_class = 'task-cold'  # Cold temperature
-                elif temperature >= 10 and temperature < 20:
-                    background_class = 'task-moderate'  # Moderate temperature
-                else:
-                    background_class = 'task-warm'  # Warm temperature
-
-        return background_class
-
+    """
+        WeatherParser is responsible for parsing weather data for a given location.
+    """
     def parse_location_weather_response(self, location, weather_data):
+        """
+        Parses weather data for a given location and returns a Weather object.
 
-        location_data = {}
+        Args:
+            location (str):      The name of the location for which the weather data is provided.
+            weather_data (dict): The weather data dictionary containing 'temp', 'main', and 'icon' keys.
 
-        if weather_data:
-            location_data = {
-                'location': location,
-                'temperature': weather_data.get('temp'),
-                'background_class': self.get_color_for_location(weather_data)
-            }
+        Returns:
+            Weather: An instance of the Weather class populated with the parsed data.
+        """
+        is_cloudy = False
+        is_rain = False
+        is_sunny = False
 
-        return location_data
+        # Validate the presence of weather_data
+        if not weather_data:
+            raise ValueError("Weather data is required")
+
+        temperature = weather_data.get('temp')
+        main = weather_data.get('main')
+        icon = weather_data.get('icon')
+
+        # Validate the required fields in weather_data
+        if temperature is None:
+            raise ValueError("Temperature is missing in weather data")
+        if main is None:
+            raise ValueError("Main weather condition is missing in weather data")
+        if icon is None:
+            raise ValueError("Weather icon is missing in weather data")
+
+        # Set weather condition flags based on the 'main' and 'icon' values
+        if main == 'Clouds':
+            is_cloudy = True
+        if main == 'Rain':
+            is_rain = True
+        if main == 'Clear' and icon == '01d':
+            is_sunny = True
+
+        # Return the Weather object with the parsed data
+        return Weather(location, temperature, is_rain, is_cloudy, is_sunny)

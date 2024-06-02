@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views import View
 from locations.models.location import Location
-
+from tasks.handlers.views.context_handler import get_locations_context
 
 
 class TaskLocationAPIView(View):
@@ -15,10 +15,6 @@ class TaskLocationAPIView(View):
     def get(self, request, pk=None):
 
         location = self.get_location(pk)
+        locations_context = get_locations_context(request, [location])
 
-        location_context = []
-        if location:
-            location_weather_info = location.get_weather_info(request)
-            location_context.append(location_weather_info)
-
-        return JsonResponse(location_context, safe=False)
+        return JsonResponse(locations_context, safe=False)

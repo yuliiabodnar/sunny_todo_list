@@ -32,10 +32,6 @@ class WeatherService:
             # Use reverse to get the relative URL for the given endpoint
             weather_path = reverse(endpoint)
 
-            # Build the full base URL using request.scheme and request.get_host
-            full_base_url = f"{self.request.scheme}://{self.request.get_host()}"
-            weather_url = f"{full_base_url}{weather_path}"
-
             # Encode query parameters
             query_string = urlencode(params)
 

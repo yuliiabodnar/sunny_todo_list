@@ -23,6 +23,7 @@ def _map_weather_response(location, response):
         mapped_data['temp'] = None
 
     if "weather" in response and response["weather"]:
+        mapped_data['condition-code'] = response["weather"][0].get("id", None)
         mapped_data['main'] = response["weather"][0].get("main", None)
         mapped_data['icon'] = response["weather"][0].get("icon", None)
     else:

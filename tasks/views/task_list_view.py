@@ -1,13 +1,26 @@
 # tasks/views/task_list_view.py
-
+import requests
+from django.shortcuts import render
 from django.views.generic import ListView
-from tasks.models import Task
+from tasks.models.task import Task
 
 
 class TaskListView(ListView):
     """
     A class-based view for displaying a list of tasks.
     """
-    model = Task  # Specify the model to use for the list view
     template_name = 'tasks/task_list.html'  # Specify the template to render
-    context_object_name = 'tasks'  # Name of the context variable to use in the template
+
+    def get(self, request):
+        """
+        Handle GET requests to display the task list.
+
+        Args:
+            request (HttpRequest): The HTTP GET request object.
+
+        Returns:
+            HttpResponse: The rendered task list template.
+        """
+        tasks = Task.objects.all()
+
+        return render(request, self.template_name, {'tasks': tasks})

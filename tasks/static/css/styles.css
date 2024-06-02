@@ -2,10 +2,39 @@
     background-color: lightblue;
 }
 
-.task-moderate {
-    background-color: lightgreen;
+.task-warm {
+    background-color: #FFB347;
 }
 
-.task-warm {
-    background-color: lightyellow;
+.task-hot {
+    background-color: #FFCCCC;
+}
+
+.custom-link {
+    text-decoration: none; /* Removes the default underline */
+    color: inherit; /* Inherits the color of the parent element */
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.custom-link .task {
+    color: inherit; /* Ensures the text within the task div inherits the color of the link */
+    border: 1px solid transparent;
+    transition: border 0.3s ease, color 0.3s ease;
+    margin: 10px;
+    padding: 10px;
+}
+
+.custom-link:hover, .custom-link:hover .task {
+    color: #ff6600; /* Set the desired color on hover */
+}
+
+/* Optionally, you can define a specific color if you don't want to inherit the parent color */
+.custom-link, .custom-link .task {
+    color: #333; /* Set your desired color */
+}
+
+#task-container {
+    margin: 10px;
+    padding: 10px;
 }

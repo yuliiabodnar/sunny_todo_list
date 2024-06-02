@@ -7,24 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<table class="table table-striped">
-    <tbody>
-        <tr>
-            <td class="col-md-2" >Task:</td>
-            <td>{{ task.name }}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{ task.location.name }}</td>
-        </tr>
-        <tr>
-            <td>Is completed</td>
-            <td>{{ task.completed|yesno:"Yes,No" }}</td>
-        </tr>
-    </tbody>
-</table>
+<div id="task-container">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td class="col-md-2" >Task:</td>
+                <td>{{ task.name }}</td>
+            </tr>
+            <tr>
+                <td>Location:</td>
+                <td>{{ task.location.name }}</td>
+            </tr>
+            <tr>
+                <td>Is completed</td>
+                <td>{{ task.completed|yesno:"Yes,No" }}</td>
+            </tr>
+        </tbody>
+    </table>
 <a href="{% url 'tasks:task_edit' task.id %}"><button type="button" class="btn btn-secondary">Edit task</button></a>
 <a href="{% url 'tasks:task_delete' task.id %}" onclick="return confirmDelete();">
     <button type="button" class="btn btn-secondary">Delete task</button>
 </a>
+</div>
 {% endblock %}
