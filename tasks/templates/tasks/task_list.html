@@ -10,8 +10,8 @@
         <a href="{% url 'tasks:task_detail' pk=task.pk %}" class="custom-link">
             <div class="{% if task.completed %}task completed {{ task.background_class }}{% else %}task {% endif %}" location="{{ task.location.name }}">
                 <h2>{{ task.name }}</h2>
+                <p>{{ task.completed|yesno:"Task is completed," }}</p>
                 <p>Location: {{ task.location.name }}</p>
-                <p>Is completed: {{ task.completed }}</p>
             </div>
         </a>
     {% endfor %}
