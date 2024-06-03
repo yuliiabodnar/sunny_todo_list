@@ -12,9 +12,6 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install requests library
-RUN pip install requests
-
 # Copy the Django project files into the container
 COPY . /app/
 
